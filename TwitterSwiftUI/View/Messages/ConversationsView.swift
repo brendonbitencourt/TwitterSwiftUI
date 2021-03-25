@@ -1,29 +1,29 @@
 //
-//  FeedView.swift
+//  ConversationsView.swift
 //  TwitterSwiftUI
 //
-//  Created by Brendon Bitencourt Braga on 2021-03-24.
+//  Created by Brendon Bitencourt Braga on 2021-03-25.
 //
 
 import SwiftUI
 
-struct FeedView: View {
+struct ConversationsView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ScrollView(showsIndicators: false) {
                 // LazyVStack
                 VStack {
                     ForEach(0..<9) { _ in
-                        TweetCell()
+                        ConversationCell()
                     }
                 }
                 .padding(.top)
             }
             
             Button(action: {}, label: {
-                Image("tweet")
+                Image(systemName: "envelope")
                     .resizable()
-                    .renderingMode(.template)
+                    .scaledToFit()
                     .frame(width: 32, height: 32)
                     .padding()
             })
@@ -35,8 +35,8 @@ struct FeedView: View {
     }
 }
 
-struct FeedView_Previews: PreviewProvider {
+struct ConversationsView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView()
+        ConversationsView()
     }
 }
