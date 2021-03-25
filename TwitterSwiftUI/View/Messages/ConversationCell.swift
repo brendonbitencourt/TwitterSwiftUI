@@ -25,6 +25,7 @@ struct ConversationCell: View {
                         .font(.system(size: 14))
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                .foregroundColor(.black)
                 .padding(.trailing)
             }
             
