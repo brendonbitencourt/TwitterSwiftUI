@@ -32,7 +32,7 @@ struct ContentView: View {
             
             // NavigationView Modifiers
             .navigationBarTitle("Home")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.automatic)
         }
     }
 }
