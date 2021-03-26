@@ -34,6 +34,7 @@
 		DAF307BE260E527200470949 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307BD260E527200470949 /* RegistrationView.swift */; };
 		DAF307C1260E573D00470949 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307C0260E573D00470949 /* CustomTextField.swift */; };
 		DAF307C4260E5BE200470949 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307C3260E5BE200470949 /* CustomSecureField.swift */; };
+		DAF307C7260E6CF900470949 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307C6260E6CF900470949 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		DAF307BD260E527200470949 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		DAF307C0260E573D00470949 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DAF307C3260E5BE200470949 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
+		DAF307C6260E6CF900470949 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				DAF307B4260E4B1600470949 /* TextArea.swift */,
 				DAF307C0260E573D00470949 /* CustomTextField.swift */,
 				DAF307C3260E5BE200470949 /* CustomSecureField.swift */,
+				DAF307C6260E6CF900470949 /* ImagePicker.swift */,
 			);
 			path = HelperViews;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				DAF307AF260E45CD00470949 /* NewTweetView.swift in Sources */,
 				DA01CA16260D1B51003280CC /* FilterButtonView.swift in Sources */,
 				DA6CDD35260BE4E400EA12D5 /* TwitterSwiftUIApp.swift in Sources */,
+				DAF307C7260E6CF900470949 /* ImagePicker.swift in Sources */,
 				DA01C9FB260CF734003280CC /* ChatBubble.swift in Sources */,
 				DA6CDD4C260BF4B300EA12D5 /* TweetCell.swift in Sources */,
 				DA01CA07260D0AE5003280CC /* NewMessageView.swift in Sources */,
