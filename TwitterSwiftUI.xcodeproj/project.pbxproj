@@ -33,6 +33,7 @@
 		DAF307BA260E526700470949 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307B9260E526700470949 /* LoginView.swift */; };
 		DAF307BE260E527200470949 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307BD260E527200470949 /* RegistrationView.swift */; };
 		DAF307C1260E573D00470949 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307C0260E573D00470949 /* CustomTextField.swift */; };
+		DAF307C4260E5BE200470949 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307C3260E5BE200470949 /* CustomSecureField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		DAF307B9260E526700470949 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DAF307BD260E527200470949 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		DAF307C0260E573D00470949 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		DAF307C3260E5BE200470949 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 			children = (
 				DAF307B4260E4B1600470949 /* TextArea.swift */,
 				DAF307C0260E573D00470949 /* CustomTextField.swift */,
+				DAF307C3260E5BE200470949 /* CustomSecureField.swift */,
 			);
 			path = HelperViews;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				DA01CA13260D141D003280CC /* ProfileActionButtonView.swift in Sources */,
 				DAF307C1260E573D00470949 /* CustomTextField.swift in Sources */,
 				DA01C9EA260CD959003280CC /* UserCell.swift in Sources */,
+				DAF307C4260E5BE200470949 /* CustomSecureField.swift in Sources */,
 				DA01CA01260D093D003280CC /* MessageView.swift in Sources */,
 				DA01C9F2260CDD13003280CC /* ConversationCell.swift in Sources */,
 			);

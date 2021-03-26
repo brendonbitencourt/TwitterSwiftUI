@@ -1,5 +1,5 @@
 //
-//  CustomTextField.swift
+//  CustomSecureField.swift
 //  TwitterSwiftUI
 //
 //  Created by Brendon Bitencourt Braga on 2021-03-26.
@@ -7,17 +7,15 @@
 
 import SwiftUI
 
-struct CustomTextField: View {
+struct CustomSecureField: View {
     
     @Binding var text: String
     
     let placeholder: String
-    let imageName: String
-    
-    init(_ placeholder: String, text: Binding<String>, imageName: String = "") {
+
+    init(_ placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
         self._text = text
-        self.imageName = imageName
     }
     
     var body: some View {
@@ -29,23 +27,23 @@ struct CustomTextField: View {
             }
             
             HStack(spacing: 16) {
-                Image(systemName: imageName)
+                Image(systemName: "lock")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.white)
                 
-                TextField("", text: $text)
+                SecureField("", text: $text)
             }
         }
     }
 }
 
-struct CustomTextField_Previews: PreviewProvider {
+struct CustomSecureField_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            CustomTextField("Email", text: .constant(""))
+            CustomSecureField("Password", text: .constant(""))
             Spacer()
         }
         .background(Color.black)
