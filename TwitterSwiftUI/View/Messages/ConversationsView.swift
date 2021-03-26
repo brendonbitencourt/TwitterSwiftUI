@@ -35,7 +35,9 @@ struct ConversationsView: View {
                 .padding(.top)
             }
             
-            Button(action: { self.isShowingNewMessageView.toggle() }, label: {
+            Button(action: {
+                    self.isShowingNewMessageView.toggle()
+            }, label: {
                 Image(systemName: "envelope")
                     .resizable()
                     .scaledToFit()

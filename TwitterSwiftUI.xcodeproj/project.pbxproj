@@ -28,6 +28,7 @@
 		DA6CDD4C260BF4B300EA12D5 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CDD4B260BF4B300EA12D5 /* TweetCell.swift */; };
 		DA6CDD4F260BFD9500EA12D5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CDD4E260BFD9500EA12D5 /* SearchView.swift */; };
 		DA6CDD52260BFF0500EA12D5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CDD51260BFF0500EA12D5 /* SearchBar.swift */; };
+		DAF307AF260E45CD00470949 /* NewTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF307AE260E45CD00470949 /* NewTweetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		DA6CDD4B260BF4B300EA12D5 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		DA6CDD4E260BFD9500EA12D5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DA6CDD51260BFF0500EA12D5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		DAF307AE260E45CD00470949 /* NewTweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		DA6CDD45260BF00000EA12D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DAF307AD260E458200470949 /* Tweets */,
 				DA01CA0A260D10ED003280CC /* Profile */,
 				DA01C9EC260CDCE1003280CC /* Messages */,
 				DA6CDD36260BE4E400EA12D5 /* ContentView.swift */,
@@ -158,6 +161,14 @@
 				DA01C9FD260CFFA3003280CC /* Message.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DAF307AD260E458200470949 /* Tweets */ = {
+			isa = PBXGroup;
+			children = (
+				DAF307AE260E45CD00470949 /* NewTweetView.swift */,
+			);
+			path = Tweets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +247,7 @@
 				DA01CA10260D119F003280CC /* ProfileHeaderView.swift in Sources */,
 				DA01C9F8260CF31A003280CC /* ChatView.swift in Sources */,
 				DA01C9EE260CDD03003280CC /* ConversationsView.swift in Sources */,
+				DAF307AF260E45CD00470949 /* NewTweetView.swift in Sources */,
 				DA01CA16260D1B51003280CC /* FilterButtonView.swift in Sources */,
 				DA6CDD35260BE4E400EA12D5 /* TwitterSwiftUIApp.swift in Sources */,
 				DA01C9FB260CF734003280CC /* ChatBubble.swift in Sources */,
