@@ -10,11 +10,12 @@ import SwiftUI
 struct NewTweetView: View {
     
     @Binding var isPresented: Bool
+    @State var captionText = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
+                HStack(alignment: .top) {
                     Image("batman")
                         .resizable()
                         .scaledToFill()
@@ -22,8 +23,7 @@ struct NewTweetView: View {
                         .frame(width: 64, height: 64)
                         .clipShape(Circle())
                     
-                    Text("Whats's happening ?")
-                        .foregroundColor(.gray)
+                    TextArea("Whats's happening ?", text: $captionText)
                     
                     Spacer()
                 }
