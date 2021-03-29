@@ -16,7 +16,9 @@ struct RegistrationView: View {
     
     @State private var showImagePicker = false
     @State private var selectedUIImage: UIImage?
-
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     var body: some View {
         ZStack {
             VStack {
@@ -37,7 +39,7 @@ struct RegistrationView: View {
                             .foregroundColor(.white)
                             .scaledToFill()
                             .frame(width: 140, height: 140)
-                            
+                        
                     }
                 })
                 .padding(.top, 88)
@@ -75,7 +77,10 @@ struct RegistrationView: View {
                 }
                 .padding(.vertical)
                 
-                Button(action: {}, label: {
+                Button(action: {
+                    guard let selectedUIImage = selectedUIImage else { return }
+                    viewModel.registerUser(email: email, password: password, username: userName, fullname: fullName, profileImage: selectedUIImage)
+                }, label: {
                     Text("Sign up")
                         .font(.headline)
                         .foregroundColor(.blue)
@@ -97,5 +102,6 @@ struct RegistrationView: View {
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         RegistrationView()
+            .environmentObject(AuthViewModel())
     }
 }

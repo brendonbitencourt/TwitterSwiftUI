@@ -12,6 +12,8 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -49,7 +51,9 @@ struct LoginView: View {
                         })
                     }
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        viewModel.login(withEmail: email, password: password)
+                    }, label: {
                         Text("Sign in")
                             .font(.headline)
                             .foregroundColor(.blue)
@@ -87,5 +91,6 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(AuthViewModel())
     }
 }
