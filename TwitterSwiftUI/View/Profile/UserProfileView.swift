@@ -9,13 +9,14 @@ import SwiftUI
 
 struct UserProfileView: View {
     
+    @EnvironmentObject var viewModel: ProfileViewModel
     @State var selectedFilter: TwittFilterOptions = .tweets
-    let user: User
     
     var body: some View {
         ScrollView {
             VStack {
-                ProfileHeaderView(user: user)
+                ProfileHeaderView()
+                    .environmentObject(viewModel)
                     .padding()
                 
                 FilterButtonView(selectedOption: $selectedFilter)
@@ -27,13 +28,14 @@ struct UserProfileView: View {
                 }
             }
             
-            .navigationTitle("@\(user.username)")
+            .navigationTitle("@\(viewModel.user.username)")
         }
     }
 }
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView(user: MOCK_USER)
+        UserProfileView()
+            .environmentObject(ProfileViewModel(user: MOCK_USER))
     }
 }

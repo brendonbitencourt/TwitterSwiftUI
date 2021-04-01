@@ -10,11 +10,11 @@ import Kingfisher
 
 struct ProfileHeaderView: View {
     
-    let user: User
+    @EnvironmentObject var viewModel: ProfileViewModel
     
     var body: some View {
         VStack {
-            KFImage(URL(string: user.profileImageUrl))
+            KFImage(URL(string: viewModel.user.profileImageUrl))
                 .resizable()
                 .scaledToFill()
                 .clipped()
@@ -22,11 +22,11 @@ struct ProfileHeaderView: View {
                 .clipShape(Circle())
                 .shadow(radius: 10)
             
-            Text(user.fullname)
+            Text(viewModel.user.fullname)
                 .font(.system(size: 16, weight: .semibold))
                 .padding(.top, 8)
             
-            Text("@\(user.username)")
+            Text("@\(viewModel.user.username)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             
@@ -57,7 +57,8 @@ struct ProfileHeaderView: View {
             }
             .padding()
             
-            ProfileActionButtonView(isCurrentUser: user.isCurrentUser())
+            ProfileActionButtonView()
+                .environmentObject(viewModel)
             
             Spacer()
         }
@@ -66,6 +67,7 @@ struct ProfileHeaderView: View {
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHeaderView(user: MOCK_USER)
+        ProfileHeaderView()
+            .environmentObject(ProfileViewModel(user: MOCK_USER))
     }
 }

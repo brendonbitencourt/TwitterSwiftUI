@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ProfileActionButtonView: View {
     
-    let isCurrentUser: Bool
+    @EnvironmentObject var viewModel: ProfileViewModel
     
     var body: some View {
         
-        if isCurrentUser {
+        if viewModel.user.isCurrentUser() {
             Button(action: {}, label: {
                 Text("Edit profile")
                     .frame(width: 360, height: 40)
@@ -23,8 +23,10 @@ struct ProfileActionButtonView: View {
             .cornerRadius(20)
         } else {
             HStack {
-                Button(action: {}, label: {
-                    Text("Follow")
+                Button(action: {
+                    viewModel.isFollowed ? viewModel.unfollow() : viewModel.follow()
+                }, label: {
+                    Text(viewModel.isFollowed ? "Following" : "Follow")
                         .frame(width: 180, height: 40)
                         .background(Color.blue)
                         .foregroundColor(.white)
@@ -45,6 +47,7 @@ struct ProfileActionButtonView: View {
 
 struct ProfileActionButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileActionButtonView(isCurrentUser: false)
+        ProfileActionButtonView()
+            .environmentObject(ProfileViewModel(user: MOCK_USER))
     }
 }
