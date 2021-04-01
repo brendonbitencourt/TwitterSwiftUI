@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct ContentView: View {
     
@@ -42,13 +41,8 @@ struct ContentView: View {
                     .navigationBarItems(leading: Button(action: {
                         viewModel.signOut()
                     }, label: {
-                        if let user = viewModel.user {
-                            KFImage(URL(string: user.profileImageUrl))
-                                .resizable()
-                                .scaledToFill()
-                                .clipped()
-                                .frame(width: 32,  height: 32)
-                                .clipShape(Circle())
+                        if viewModel.userSession != nil {
+                            Text("Logout")
                         }
                     }))
                     .navigationBarTitleDisplayMode(.automatic)
