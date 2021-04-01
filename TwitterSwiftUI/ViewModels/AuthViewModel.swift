@@ -62,7 +62,7 @@ class AuthViewModel: ObservableObject {
                                 "profileImageUrl": profileImageUrl,
                                 "uid": user.uid]
                     
-                    Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
+                    COLLECTION_USERS.document(user.uid).setData(data) { _ in
                         self.userSession = user
                     }
                 }
@@ -77,8 +77,8 @@ class AuthViewModel: ObservableObject {
     
     func fetchUser() {
         guard let uid = userSession?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).getDocument { (document, _) in
-            if let document = document, let user = try? document.data(as: User.self) {
+        COLLECTION_USERS.document(uid).getDocument { (snapshot, _) in
+            if let document = snapshot, let user = try? document.data(as: User.self) {
                 self.user = user
             }
         }

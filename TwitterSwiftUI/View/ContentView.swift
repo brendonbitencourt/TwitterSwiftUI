@@ -23,6 +23,7 @@ struct ContentView: View {
                             }
                         
                         SearchView()
+                            .environmentObject(SearchViewModel())
                             .tabItem {
                                 Image(systemName: "magnifyingglass")
                                 Text("Search")

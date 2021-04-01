@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @State var searchText = ""
+    @EnvironmentObject var viewModel: SearchViewModel
      
     var body: some View {
         ScrollView {
@@ -17,11 +18,11 @@ struct SearchView: View {
                 .padding()
             
             VStack(alignment: .leading) {
-                ForEach(0..<10) { _ in
+                ForEach(viewModel.users) { user in
                     NavigationLink(
                         destination: UserProfileView(),
                         label: {
-                            UserCell()
+                            UserCell(user: user)
                         })
                     HStack { Spacer() }
                 }
@@ -34,5 +35,6 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+            .environmentObject(SearchViewModel(withMOCK: true))
     }
 }

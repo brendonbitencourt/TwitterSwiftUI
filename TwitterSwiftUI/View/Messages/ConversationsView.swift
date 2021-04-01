@@ -50,6 +50,7 @@ struct ConversationsView: View {
             .padding()
             .sheet(isPresented: $isShowingNewMessageView, content: {
                 NewMessageView(show: $isShowingNewMessageView, startChat: $showChat)
+                    .environmentObject(SearchViewModel())
             })
         }
     }

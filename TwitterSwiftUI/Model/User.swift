@@ -22,3 +22,7 @@ struct User: Identifiable, Codable {
         case email
     }
 }
+
+let MOCK_USER = User(id: NSUUID().uuidString, username: "brendon.braga", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/twitterswiftui-98021.appspot.com/o/DE373011-0C99-4D18-9450-5328BCDD0375?alt=media&token=53253dda-b075-485e-aa77-87d1c14ee4e5", fullname: "Brendon Bitencourt", email: "brendon.braga@gmail.com")
+
+let MOCK_USERS = [MOCK_USER, MOCK_USER, MOCK_USER, MOCK_USER, MOCK_USER, MOCK_USER]
