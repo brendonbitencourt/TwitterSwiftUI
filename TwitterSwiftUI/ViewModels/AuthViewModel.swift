@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
 
 class AuthViewModel: ObservableObject {
     
@@ -17,6 +20,7 @@ class AuthViewModel: ObservableObject {
     
     init() {
         userSession = Auth.auth().currentUser
+        fetchUser()
     }
     
     func login(withEmail email: String, password: String) {
@@ -25,6 +29,7 @@ class AuthViewModel: ObservableObject {
                 print(error.localizedDescription)
                 return
             }
+            self.userSession = result?.user
         }
     }
     
@@ -52,13 +57,13 @@ class AuthViewModel: ObservableObject {
                     guard let user = result?.user else { return }
                     
                     let data = ["email": email,
-                                "username": username,
+                                "username": username.lowercased(),
                                 "fullname": fullname,
                                 "profileImageUrl": profileImageUrl,
                                 "uid": user.uid]
                     
                     Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
-                        
+                        self.userSession = user
                     }
                 }
             }
@@ -68,6 +73,15 @@ class AuthViewModel: ObservableObject {
     func signOut() {
         userSession = nil
         try? Auth.auth().signOut()
+    }
+    
+    func fetchUser() {
+        guard let uid = userSession?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (document, _) in
+            if let document = document, let user = try? document.data(as: User.self) {
+                self.user = user
+            }
+        }
     }
     
 }
