@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct User: Identifiable, Codable {
     let id: String
@@ -20,6 +21,10 @@ struct User: Identifiable, Codable {
         case profileImageUrl
         case fullname
         case email
+    }
+    
+    func isCurrentUser() -> Bool {
+        return Auth.auth().currentUser?.uid == self.id
     }
 }
 

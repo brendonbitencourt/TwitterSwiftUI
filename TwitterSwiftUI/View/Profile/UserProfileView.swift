@@ -10,11 +10,12 @@ import SwiftUI
 struct UserProfileView: View {
     
     @State var selectedFilter: TwittFilterOptions = .tweets
+    let user: User
     
     var body: some View {
         ScrollView {
             VStack {
-                ProfileHeaderView()
+                ProfileHeaderView(user: user)
                     .padding()
                 
                 FilterButtonView(selectedOption: $selectedFilter)
@@ -26,13 +27,13 @@ struct UserProfileView: View {
                 }
             }
             
-            .navigationTitle("@batman")
+            .navigationTitle("@\(user.username)")
         }
     }
 }
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView()
+        UserProfileView(user: MOCK_USER)
     }
 }
