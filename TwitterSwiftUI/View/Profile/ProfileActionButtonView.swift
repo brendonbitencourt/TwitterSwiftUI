@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileActionButtonView: View {
     
     @EnvironmentObject var viewModel: ProfileViewModel
+    @State private var isLoading: Bool = false
     
     var body: some View {
         
@@ -22,14 +23,24 @@ struct ProfileActionButtonView: View {
             })
             .cornerRadius(20)
         } else {
-            HStack {
+            HStack(spacing: 10) {
                 Button(action: {
-                    viewModel.isFollowed ? viewModel.unfollow() : viewModel.follow()
+                    viewModel.isFollowed ? unfollow() : follow()
                 }, label: {
-                    Text(viewModel.isFollowed ? "Following" : "Follow")
-                        .frame(width: 180, height: 40)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
+                    Group {
+                        if isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                                .frame(width: 180, height: 40)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                        } else {
+                            Text(viewModel.isFollowed ? "Following" : "Follow")
+                                .frame(width: 180, height: 40)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                        }
+                    }
                 })
                 .cornerRadius(20)
                 
@@ -41,6 +52,20 @@ struct ProfileActionButtonView: View {
                 })
                 .cornerRadius(20)
             }
+        }
+    }
+    
+    private func follow() {
+        isLoading = true
+        viewModel.follow {
+            isLoading = false
+        }
+    }
+    
+    private func unfollow() {
+        isLoading = true
+        viewModel.unfollow {
+            isLoading = false
         }
     }
 }
