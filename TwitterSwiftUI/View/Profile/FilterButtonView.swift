@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TwittFilterOptions: Int, CaseIterable {
+enum TweetFilterOptions: Int, CaseIterable {
     case tweets
     case replies
     case likes
@@ -26,20 +26,20 @@ enum TwittFilterOptions: Int, CaseIterable {
 
 struct FilterButtonView: View {
     
-    @Binding var selectedOption: TwittFilterOptions
+    @Binding var selectedOption: TweetFilterOptions
     
-    private let underlineWidth = UIScreen.main.bounds.width / CGFloat(TwittFilterOptions.allCases.count)
+    private let underlineWidth = UIScreen.main.bounds.width / CGFloat(TweetFilterOptions.allCases.count)
     
     private var padding: CGFloat {
         let rawValue = CGFloat(selectedOption.rawValue)
-        let count = CGFloat(TwittFilterOptions.allCases.count)
+        let count = CGFloat(TweetFilterOptions.allCases.count)
         return ((UIScreen.main.bounds.width / count) * rawValue) + 16
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                ForEach(TwittFilterOptions.allCases, id: \.self) { option in
+                ForEach(TweetFilterOptions.allCases, id: \.self) { option in
                     Button(action: {
                         self.selectedOption = option
                     }, label: {

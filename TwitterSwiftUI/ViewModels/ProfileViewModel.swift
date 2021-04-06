@@ -11,6 +11,8 @@ import Firebase
 class ProfileViewModel: ObservableObject {
     
     @Published var isFollowed = false
+    @Published var userTweets = [Tweet]()
+    @Published var likedTweets = [Tweet]()
     let user: User
     
     init(user: User) {
@@ -53,6 +55,46 @@ class ProfileViewModel: ObservableObject {
         followingRef.document(self.user.id).getDocument { (snapshot, _) in
             guard let isFollowed = snapshot?.exists else { return }
             self.isFollowed = isFollowed
+        }
+    }
+    
+    func fetchUserTweets() {
+        COLLECTION_TWEETS.whereField("uid", isEqualTo: user.id).getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents else { return }
+            self.userTweets = documents.compactMap({ (documentSnapshot) -> Tweet? in
+                try? documentSnapshot.data(as: Tweet.self)
+            })
+        }
+    }
+    
+    func fetchLikedTweets() {
+        var listTweets = [Tweet]()
+        let likedTweetsRef = COLLECTION_USERS.document(user.id).collection("user-likes")
+        
+        likedTweetsRef.getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents else { return }
+            let listTweetsId = documents.map({ $0.documentID })
+            
+            listTweetsId.forEach { (tweetId) in
+                COLLECTION_TWEETS.document(tweetId).getDocument { (snapshot, _) in
+                    guard let tweet = try? snapshot?.data(as: Tweet.self) else { return }
+                    listTweets.append(tweet)
+                    if listTweets.count == listTweetsId.count {
+                        self.likedTweets = listTweets
+                    }
+                }
+            }
+        }
+    }
+    
+    func tweets(forFilter filter: TweetFilterOptions) -> [Tweet] {
+        switch filter {
+        case .tweets:
+            return userTweets
+        case .replies:
+            return [Tweet]()
+        case .likes:
+            return likedTweets
         }
     }
     
