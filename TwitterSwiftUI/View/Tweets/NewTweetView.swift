@@ -12,6 +12,7 @@ struct NewTweetView: View {
     
     @Binding var isPresented: Bool
     @State var captionText = ""
+    @EnvironmentObject var viewModel: UploadTweetViewModel
     
     var body: some View {
         NavigationView {
@@ -40,7 +41,9 @@ struct NewTweetView: View {
                 Text("Cancel")
                     .foregroundColor(.blue)
             }),
-            trailing: Button(action: {}, label: {
+            trailing: Button(action: {
+                viewModel.uploadTweet(caption: captionText)
+            }, label: {
                 Text("Tweet")
                     .padding(.horizontal)
                     .padding(.vertical, 8)
@@ -55,5 +58,6 @@ struct NewTweetView: View {
 struct NewTweetView_Previews: PreviewProvider {
     static var previews: some View {
         NewTweetView(isPresented: .constant(true))
+            .environmentObject(UploadTweetViewModel(isPresented: .constant(true)))
     }
 }

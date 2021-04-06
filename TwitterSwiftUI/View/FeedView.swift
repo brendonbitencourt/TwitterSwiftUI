@@ -38,6 +38,7 @@ struct FeedView: View {
             .padding()
             .fullScreenCover(isPresented: $isShowingNewTweetView) {
                 NewTweetView(isPresented: $isShowingNewTweetView)
+                    .environmentObject(UploadTweetViewModel(isPresented: $isShowingNewTweetView))
             }
             
         }
