@@ -42,6 +42,7 @@ struct TweetCell: View {
             .padding(.horizontal)
             
             TweetActionView()
+                .environmentObject(TweetActionViewModel(tweet: tweet))
             
             Divider()
         }

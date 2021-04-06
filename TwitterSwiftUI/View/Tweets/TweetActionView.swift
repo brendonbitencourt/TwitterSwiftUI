@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TweetActionView: View {
+    
+    @EnvironmentObject var viewModel: TweetActionViewModel
+    
     var body: some View {
         HStack {
             Button(action: {}, label: {
@@ -26,8 +29,10 @@ struct TweetActionView: View {
             
             Spacer()
             
-            Button(action: {}, label: {
-                Image(systemName: "heart")
+            Button(action: {
+                viewModel.didLike ? viewModel.unlikeTweet() :  viewModel.likeTweet()
+            }, label: {
+                Image(systemName: viewModel.didLike ? "heart.fill" : "heart")
                     .font(.system(size: 16))
                     .frame(width: 32, height: 32)
             })
@@ -49,5 +54,6 @@ struct TweetActionView: View {
 struct TweetActionView_Previews: PreviewProvider {
     static var previews: some View {
         TweetActionView()
+            .environmentObject(TweetActionViewModel(tweet: MOCK_TWEET))
     }
 }

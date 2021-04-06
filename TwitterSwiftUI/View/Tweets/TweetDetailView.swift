@@ -64,6 +64,7 @@ struct TweetDetailView: View {
             Divider()
             
             TweetActionView()
+                .environmentObject(TweetActionViewModel(tweet: tweet))
             
             Spacer()
         }
