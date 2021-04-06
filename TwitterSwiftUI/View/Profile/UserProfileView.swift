@@ -23,7 +23,7 @@ struct UserProfileView: View {
                     .padding()
                 
                 ForEach(0..<9) { _ in
-                    TweetCell()
+                    TweetCell(tweet: MOCK_TWEET)
                         .padding(.horizontal)
                 }
             }

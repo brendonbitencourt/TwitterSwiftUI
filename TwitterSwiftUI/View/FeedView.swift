@@ -10,14 +10,15 @@ import SwiftUI
 struct FeedView: View {
     
     @State private var isShowingNewTweetView = false
+    @EnvironmentObject var viewModel: FeedViewModel
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ScrollView(showsIndicators: false) {
                 // LazyVStack
                 VStack {
-                    ForEach(0..<9) { _ in
-                        TweetCell()
+                    ForEach(viewModel.tweets) { (tweet) in
+                        TweetCell(tweet: tweet)
                     }
                 }
                 .padding(.top)
@@ -48,5 +49,6 @@ struct FeedView: View {
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
         FeedView()
+            .environmentObject(FeedViewModel(withMOCK: true))
     }
 }

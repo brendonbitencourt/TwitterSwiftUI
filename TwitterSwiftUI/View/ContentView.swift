@@ -17,6 +17,7 @@ struct ContentView: View {
                 NavigationView {
                     TabView {
                         FeedView()
+                            .environmentObject(FeedViewModel())
                             .tabItem {
                                 Image(systemName: "house")
                                 Text("Home")
