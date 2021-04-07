@@ -25,6 +25,8 @@ struct ChatView: View {
             MessageInputView(messageText: $messageText)
                 .padding()
         }
+        
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

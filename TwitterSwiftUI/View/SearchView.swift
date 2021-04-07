@@ -11,14 +11,14 @@ struct SearchView: View {
     
     @State var searchText = ""
     @EnvironmentObject var viewModel: SearchViewModel
-     
+    
     var body: some View {
         ScrollView {
             SearchBar(text: $searchText)
                 .padding()
             
             VStack(alignment: .leading) {
-                ForEach(viewModel.users) { user in
+                ForEach(searchText.isEmpty ? viewModel.users : viewModel.filteredUsers(searchText)) { user in
                     NavigationLink(
                         destination: LazyView(UserProfileView()
                             .environmentObject(ProfileViewModel(user: user))),
