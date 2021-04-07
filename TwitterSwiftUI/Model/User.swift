@@ -14,6 +14,8 @@ struct User: Identifiable, Codable {
     let profileImageUrl: String
     let fullname: String
     let email: String
+    var isFollowed = false
+    var stats = UserStats(followers: 0, following: 0)
     
     enum CodingKeys: String, CodingKey {
         case id  = "uid"
@@ -26,6 +28,11 @@ struct User: Identifiable, Codable {
     func isCurrentUser() -> Bool {
         return Auth.auth().currentUser?.uid == self.id
     }
+}
+
+struct UserStats {
+    let followers: Int
+    let following: Int
 }
 
 let MOCK_USER = User(id: NSUUID().uuidString, username: "brendon.braga", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/twitterswiftui-98021.appspot.com/o/DE373011-0C99-4D18-9450-5328BCDD0375?alt=media&token=53253dda-b075-485e-aa77-87d1c14ee4e5", fullname: "Brendon Bitencourt", email: "brendon.braga@gmail.com")

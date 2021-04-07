@@ -25,7 +25,7 @@ struct ProfileActionButtonView: View {
         } else {
             HStack(spacing: 10) {
                 Button(action: {
-                    viewModel.isFollowed ? unfollow() : follow()
+                    viewModel.user.isFollowed ? unfollow() : follow()
                 }, label: {
                     Group {
                         if isLoading {
@@ -35,7 +35,7 @@ struct ProfileActionButtonView: View {
                                 .background(Color.blue)
                                 .foregroundColor(.white)
                         } else {
-                            Text(viewModel.isFollowed ? "Following" : "Follow")
+                            Text(viewModel.user.isFollowed ? "Following" : "Follow")
                                 .frame(width: 180, height: 40)
                                 .background(Color.blue)
                                 .foregroundColor(.white)

@@ -34,6 +34,7 @@ struct UserProfileView: View {
         .onAppear(perform: {
             viewModel.fetchUserTweets()
             viewModel.fetchLikedTweets()
+            viewModel.fetchUserStats()
         })
     }
 }
