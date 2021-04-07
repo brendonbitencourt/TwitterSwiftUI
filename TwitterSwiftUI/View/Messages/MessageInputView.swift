@@ -10,6 +10,7 @@ import SwiftUI
 struct MessageInputView: View {
     
     @Binding var messageText: String
+    var onSend: () -> Void
     
     var body: some View {
         HStack {
@@ -17,7 +18,7 @@ struct MessageInputView: View {
                 .textFieldStyle(PlainTextFieldStyle())
                 .frame(minHeight: 30)
             
-            Button(action: {}, label: {
+            Button(action: onSend, label: {
                 Text("Send")
             })
         }
@@ -26,6 +27,6 @@ struct MessageInputView: View {
 
 struct MessageInputView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageInputView(messageText: .constant(""))
+        MessageInputView(messageText: .constant(""), onSend: {})
     }
 }

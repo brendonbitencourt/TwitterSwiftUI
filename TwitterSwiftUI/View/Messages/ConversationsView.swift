@@ -16,7 +16,7 @@ struct ConversationsView: View {
         ZStack(alignment: .bottomTrailing) {
             // Navigation
             NavigationLink(
-                destination: ChatView(),
+                destination: ChatView(user: MOCK_USER),
                 isActive: $showChat,
                 label: {}
             )
@@ -26,9 +26,10 @@ struct ConversationsView: View {
                 VStack {
                     ForEach(0..<9) { _ in
                         NavigationLink(
-                            destination: ChatView(),
+                            destination: ChatView(user: MOCK_USER),
                             label: {
                                 ConversationCell()
+                                    .padding(.horizontal)
                             })
                     }
                 }
