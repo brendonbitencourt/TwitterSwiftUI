@@ -35,6 +35,7 @@ struct ChatView: View {
             .padding()
         }
         
+        .navigationBarTitle(user.fullname)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

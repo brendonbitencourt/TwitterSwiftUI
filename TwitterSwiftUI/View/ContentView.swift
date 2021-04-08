@@ -31,6 +31,7 @@ struct ContentView: View {
                             }
                         
                         ConversationsView()
+                            .environmentObject(ConversationsViewModel())
                             .tabItem {
                                 Image(systemName: "envelope")
                                 Text("Messages")

@@ -11,25 +11,28 @@ struct ConversationsView: View {
     
     @State private var isShowingNewMessageView = false
     @State private var showChat = false
+    @State private var user: User?
+    @EnvironmentObject var viewModel: ConversationsViewModel
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             // Navigation
-            NavigationLink(
-                destination: ChatView(user: MOCK_USER),
-                isActive: $showChat,
-                label: {}
-            )
+            if let user = user {
+                NavigationLink(
+                    destination: ChatView(user: user),
+                    isActive: $showChat,
+                    label: {}
+                )
+            }
             
             ScrollView(showsIndicators: false) {
                 // LazyVStack
                 VStack {
-                    ForEach(0..<9) { _ in
+                    ForEach(viewModel.recentMessages) { message in
                         NavigationLink(
-                            destination: ChatView(user: MOCK_USER),
+                            destination: ChatView(user: message.user!),
                             label: {
-                                ConversationCell()
-                                    .padding(.horizontal)
+                                ConversationCell(message: message)
                             })
                     }
                 }
@@ -50,7 +53,7 @@ struct ConversationsView: View {
             .clipShape(Circle())
             .padding()
             .sheet(isPresented: $isShowingNewMessageView, content: {
-                NewMessageView(show: $isShowingNewMessageView, startChat: $showChat)
+                NewMessageView(show: $isShowingNewMessageView, startChat: $showChat, user: $user)
                     .environmentObject(SearchViewModel())
             })
         }
@@ -60,5 +63,6 @@ struct ConversationsView: View {
 struct ConversationsView_Previews: PreviewProvider {
     static var previews: some View {
         ConversationsView()
+            .environmentObject(ConversationsViewModel())
     }
 }
