@@ -9,20 +9,14 @@ import SwiftUI
 
 struct ChatView: View {
     
+    @EnvironmentObject var viewModel: ChatViewModel
     @State var messageText: String = ""
-    let user: User
-    let viewModel: ChatViewModel
-    
-    init(user: User) {
-        self.user = user
-        self.viewModel = ChatViewModel(user: user)
-    }
     
     var body: some View {
         VStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    ForEach(MOCK_MESSAGES) { message in
+                    ForEach(viewModel.messages) { message in
                         MessageView(message: message)
                     }
                 }
@@ -34,14 +28,19 @@ struct ChatView: View {
             })
             .padding()
         }
+        .onAppear(perform: {
+            viewModel.messages.removeAll()
+            viewModel.fetchMessages()
+        })
         
-        .navigationBarTitle(user.fullname)
+        .navigationBarTitle(viewModel.user.fullname)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView(user: MOCK_USER)
+        ChatView()
+            .environmentObject(ChatViewModel(user: MOCK_USER))
     }
 }

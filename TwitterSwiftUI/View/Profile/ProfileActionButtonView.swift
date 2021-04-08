@@ -45,7 +45,8 @@ struct ProfileActionButtonView: View {
                 .cornerRadius(20)
                 
                 NavigationLink(
-                    destination: ChatView(user: viewModel.user),
+                    destination: ChatView()
+                        .environmentObject(ChatViewModel(user: viewModel.user)),
                     label: {
                         Text("Message")
                             .frame(width: 180, height: 40)

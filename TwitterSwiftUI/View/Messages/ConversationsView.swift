@@ -19,7 +19,8 @@ struct ConversationsView: View {
             // Navigation
             if let user = user {
                 NavigationLink(
-                    destination: ChatView(user: user),
+                    destination: ChatView()
+                        .environmentObject(ChatViewModel(user: user)),
                     isActive: $showChat,
                     label: {}
                 )
@@ -30,7 +31,8 @@ struct ConversationsView: View {
                 VStack {
                     ForEach(viewModel.recentMessages) { message in
                         NavigationLink(
-                            destination: ChatView(user: message.user!),
+                            destination: ChatView()
+                                .environmentObject(ChatViewModel(user: message.user!)),
                             label: {
                                 ConversationCell(message: message)
                             })
@@ -40,7 +42,7 @@ struct ConversationsView: View {
             }
             
             Button(action: {
-                    self.isShowingNewMessageView.toggle()
+                self.isShowingNewMessageView.toggle()
             }, label: {
                 Image(systemName: "envelope")
                     .resizable()

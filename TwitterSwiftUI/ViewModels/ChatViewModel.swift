@@ -8,16 +8,34 @@
 import SwiftUI
 import Firebase
 
-struct ChatViewModel {
+class ChatViewModel: ObservableObject {
     
+    @Published var messages = [Message]()
     let user: User
     
     init(user: User) {
         self.user = user
     }
     
-    func fetchMessage() {
+    func fetchMessages() {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
+        let currentRecentRef = COLLECTION_MESSAGES.document(currentUid).collection(user.id)
+        currentRecentRef.order(by: "timestamp", descending: true)
+        
+        currentRecentRef.addSnapshotListener { (snapshot, _) in
+            guard let documents = snapshot?.documentChanges.filter({ $0.type == .added }) else { return }
+            documents.forEach { (snapshotRecent) in
+                if var message = try? snapshotRecent.document.data(as: Message.self) {
+                    COLLECTION_USERS.document(message.fromId).getDocument { (snapshotUser, _) in
+                        if let user = try? snapshotUser?.data(as: User.self) {
+                            message.user = user
+                            self.messages.append(message)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func sendMessage(_ message: String) {
@@ -29,10 +47,10 @@ struct ChatViewModel {
         let messageId = currentUserRef.documentID
         
         let data: [String : Any] = ["text": message,
-                    "id": messageId,
-                    "fromId": currentUid,
-                    "toId": user.id,
-                    "timestamp": Timestamp(date: Date())]
+                                    "id": messageId,
+                                    "fromId": currentUid,
+                                    "toId": user.id,
+                                    "timestamp": Timestamp(date: Date())]
         
         currentUserRef.setData(data)
         receivingUserRef.document(messageId).setData(data)
