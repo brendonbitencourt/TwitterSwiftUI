@@ -6,27 +6,36 @@
 //
 
 import SwiftUI
-import FirebaseFirestore
-import FirebaseFirestoreSwift
+import Firebase
+
+enum SearhViewModelConfiguration {
+    case search
+    case newMessage
+}
 
 class SearchViewModel: ObservableObject {
     
     @Published var users = [User]()
+    private var config: SearhViewModelConfiguration
     
-    init(withMOCK: Bool = false) {
-        if !withMOCK {
-            fetchUsers()
-        } else {
-            self.users = MOCK_USERS
-        }
+    init(config: SearhViewModelConfiguration) {
+        self.config = config
+        fetchUsers()
     }
     
     func fetchUsers() {
         COLLECTION_USERS.getDocuments { (snapshot, _) in
             guard let documents = snapshot?.documents else { return }
-            self.users = documents.compactMap({ (documentSnapshot) -> User? in
+            let users = documents.compactMap({ (documentSnapshot) -> User? in
                 try? documentSnapshot.data(as: User.self)
             })
+            
+            switch self.config {
+            case .search:
+                self.users = users
+            case .newMessage:
+                self.users = users.filter({ !$0.isCurrentUser() })
+            }
         }
     }
     

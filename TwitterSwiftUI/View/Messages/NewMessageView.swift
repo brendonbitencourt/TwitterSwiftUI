@@ -40,6 +40,6 @@ struct NewMessageView: View {
 struct NewMessageView_Previews: PreviewProvider {
     static var previews: some View {
         NewMessageView(show: .constant(true), startChat: .constant(true), user: .constant(MOCK_USER))
-            .environmentObject(SearchViewModel(withMOCK: true))
+            .environmentObject(SearchViewModel(config: .newMessage))
     }
 }
