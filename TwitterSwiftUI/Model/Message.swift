@@ -6,6 +6,32 @@
 //
 
 import Foundation
+import Firebase
+
+struct Message: Identifiable, Codable {
+    let id: String
+    let text: String
+    let toId: String
+    let fromId: String
+    let timestamp: Timestamp
+    var user: User?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case text
+        case toId
+        case fromId
+        case timestamp
+    }
+    
+    func isFromCurrentUser() -> Bool {
+        return Auth.auth().currentUser?.uid == fromId
+    }
+    
+    func chatPartnerId() -> String {
+        return isFromCurrentUser() ? toId : fromId
+    }
+}
 
 struct MockMessage: Identifiable {
     let id: Int
@@ -13,6 +39,8 @@ struct MockMessage: Identifiable {
     let messageText: String
     let isCurrentUser: Bool
 }
+
+let MOCK_MESSAGE = Message(id: NSUUID().uuidString, text: "Message", toId: "", fromId: "", timestamp: Timestamp(date: Date()), user: MOCK_USER)
 
 let MOCK_MESSAGES: [MockMessage] = [
     MockMessage(id: 0, imageName: "spiderman", messageText: "Hey whats's up", isCurrentUser: false),
